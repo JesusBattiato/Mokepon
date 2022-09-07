@@ -1,5 +1,6 @@
 let ataqueJugador
 let ataqueEnemigo
+let resultadoAtaques
 
 
 function iniciarJuego() {
@@ -72,19 +73,45 @@ function seleccionarAtaqueEnemigo() {
     let ataqueAleatorio = aleatorio(1, 3)
     switch (ataqueAleatorio) {
         case 1:
-            ataqueEnemigo = "Fuego"            
+            ataqueEnemigo = "FUEGO"            
             break;
         case 2:
-            ataqueEnemigo = "Agua"
+            ataqueEnemigo = "AGUA"
             break;
         case 3:
-            ataqueEnemigo = "Tierra"
+            ataqueEnemigo = "TIERRA"
             break;    
         default:
             alert("Sucedio un error")
             break;
     }
-   alert("El enemigo ataco con " + ataqueEnemigo)    
+   alert("El enemigo ataco con " + ataqueEnemigo) 
+   combate()
+   crearMensaje()  
+
+}
+
+function combate() {
+
+    if (ataqueEnemigo == ataqueJugador) {
+        resultadoAtaques = "Empataron"
+    } else if(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'AGUA') {
+        resultadoAtaques = "Ganaste"
+    }else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'TIERRA') {
+        resultadoAtaques = "Ganaste"
+    }else if(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'FUEGO') {
+        resultadoAtaques = "Ganaste"
+    }else{
+        resultadoAtaques = "Perdiste gil"
+    }
+
+}
+
+function crearMensaje() {
+    let sectionMensaje = document.getElementById("mensajes");
+    let parrafo = document.createElement('p');
+    parrafo.innerHTML = "Tu mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " - " + resultadoAtaques;
+    sectionMensaje.appendChild(parrafo);
 }
 
 window.addEventListener('load', iniciarJuego)
