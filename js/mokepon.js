@@ -1,6 +1,8 @@
 let ataqueJugador
 let ataqueEnemigo
 let resultadoAtaques
+let vidasJugador = 3
+let vidasEnemigo = 3
 
 
 function iniciarJuego() {
@@ -14,6 +16,8 @@ function iniciarJuego() {
     let botonTiera = document.getElementById('boton-tierra');
     botonTiera.addEventListener('click', ataqueTierra);
 
+    let reload = document.getElementById('boton-reiniciar');
+    reload.addEventListener('click',reiniciar);
     
 }
 
@@ -29,7 +33,7 @@ function seleccionarMascotaJugador() {
         if(radioElements[i].checked){
             spanMAscotaJugador.innerHTML = radioElements[i].value;
             j++
-            alert("Seleccionaste a " + radioElements[i].value )
+            //alert("Seleccionaste a " + radioElements[i].value )
             seleccionarMascotaEnemigo()
             break; 
         }
@@ -38,33 +42,30 @@ function seleccionarMascotaJugador() {
         alert("Maniiiiito... elegite un papa.. no seas gil")
     } 
     
-    
+    document.getElementById("seleccionar-ataque").style.display = '';
 }
 
 function seleccionarMascotaEnemigo() {
     let spanMAscotaEnemigo = document.getElementById("mascota-enemigo");
     let radioElements = document.getElementsByName("mascota")
-    let mascotaAleatorio = aleatorio(1, radioElements.length)
-    alert("El enemigo Selecciono " + radioElements[mascotaAleatorio].value)
+    let mascotaAleatorio = aleatorio(0, (radioElements.length-1))
+    //alert("El enemigo Selecciono " + radioElements[mascotaAleatorio].value)
     spanMAscotaEnemigo.innerHTML = radioElements[mascotaAleatorio].value;
 
 }
 
 function ataqueFuego() {
     ataqueJugador = "FUEGO"
-    alert("Vas a Atacar con " + ataqueJugador)
     seleccionarAtaqueEnemigo()
 }
 
 function ataqueAgua() {
     ataqueJugador = "AGUA"
-    alert("Vas a Atacar con " + ataqueJugador)
     seleccionarAtaqueEnemigo()
 }
 
 function ataqueTierra() {
     ataqueJugador = "TIERRA"
-    alert("Vas a Atacar con " + ataqueJugador)
     seleccionarAtaqueEnemigo()
 }
 
@@ -85,25 +86,36 @@ function seleccionarAtaqueEnemigo() {
             alert("Sucedio un error")
             break;
     }
-   alert("El enemigo ataco con " + ataqueEnemigo) 
+
    combate()
    crearMensaje()  
 
 }
 
 function combate() {
+    let spanVidasJugador = document.getElementById("vidas-jugador")
+    let spanVidasEnemigo = document.getElementById("vidas-enemigo")
 
     if (ataqueEnemigo == ataqueJugador) {
-        resultadoAtaques = "Empataron"
+        resultadoAtaques = "Empataron"        
     } else if(ataqueJugador == 'FUEGO' && ataqueEnemigo == 'AGUA') {
         resultadoAtaques = "Ganaste"
+        vidasEnemigo--
     }else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'TIERRA') {
         resultadoAtaques = "Ganaste"
+        vidasEnemigo--
     }else if(ataqueJugador == 'TIERRA' && ataqueEnemigo == 'FUEGO') {
         resultadoAtaques = "Ganaste"
+        vidasEnemigo--
     }else{
         resultadoAtaques = "Perdiste gil"
+        vidasJugador--
     }
+
+    spanVidasEnemigo.innerHTML = vidasEnemigo
+    spanVidasJugador.innerHTML = vidasJugador
+
+    revisarVidas()
 
 }
 
@@ -113,5 +125,25 @@ function crearMensaje() {
     parrafo.innerHTML = "Tu mascota atacó con " + ataqueJugador + ", la mascota del enemigo atacó con " + ataqueEnemigo + " - " + resultadoAtaques;
     sectionMensaje.appendChild(parrafo);
 }
+
+function revisarVidas() {
+    if (vidasJugador == 0) {
+        document.getElementById("juego").style.display = 'none';
+        document.getElementById("resultado-final").style.display = '';
+        document.getElementById("titulo-final").innerHTML = "Papon...Perdiste.. Por Gil"        
+        document.getElementById("vidas-e").innerHTML = vidasEnemigo
+
+    } else if(vidasEnemigo == 0){
+        document.getElementById("juego").style.display = 'none';
+        document.getElementById("resultado-final").style.display = ''
+        document.getElementById("vidas-j").innerHTML = vidasJugador
+        
+    }
+}
+
+function reiniciar() {
+    location.reload();
+}
+
 
 window.addEventListener('load', iniciarJuego)

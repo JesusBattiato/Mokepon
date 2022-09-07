@@ -7,41 +7,45 @@
     </head>
     <body>        
         <h1>MOKEPON! 🔥💧🌱</h1>
-
-        <section id="seleccionar-mascota">
-            <h2>Elige tu mascota:</h2>
-            
-                <label for="hipodoge">Hipodoge</label>
-                <input type="radio" name="mascota" id="hipodoge" value="HIPODOGE"/>
+            <div id="juego">
+            <section id="seleccionar-mascota">
+                <h2>Elige tu mascota:</h2>
                 
-                <label for="capipepo">Capipepo</label>
-                <input type="radio" name="mascota" id="capipepo" value="CAPIPEPO"/>
+                    <label for="hipodoge">Hipodoge</label>
+                    <input type="radio" name="mascota" id="hipodoge" value="HIPODOGE"/>
+                    
+                    <label for="capipepo">Capipepo</label>
+                    <input type="radio" name="mascota" id="capipepo" value="CAPIPEPO"/>
+                    
+                    <label for="ratigueya">Ratigueya</label>
+                    <input type="radio" name="mascota" id="ratigueya" value="RATIGUEYA"/>
+
+                    <button id="boton-mascota">Seleccionar</button>
                 
-                <label for="ratigueya">Ratigueya</label>
-                <input type="radio" name="mascota" id="ratigueya" value="RATIGUEYA"/>
+            </section>
 
-                <button id="boton-mascota">Seleccionar</button>
-            
-        </section>
+            <section id="seleccionar-ataque" style="display: none">
+                <h2>Elige tu ataque:</h2>
 
-        <section id="seleccionar-ataque">
-            <h2>Elige tu ataque:</h2>
+                <p>Tu mascota <span id="mascota-jugador"> </span> tiene <span id="vidas-jugador" >3</span> vidas</p>
+                <p>Las mascota del enemigo <span id="mascota-enemigo"> </span> tiene <span id="vidas-enemigo" >3</span> vidas</p>
 
-            <p>Tu mascota <span id="mascota-jugador"> Ratigueya </span> tiene <span>3</span> vidas</p>
-            <p>Las mascota del enemigo <span id="mascota-enemigo"> </span> tiene <span>3</span> vidas</p>
+                <p>
+                    <button id="boton-fuego">Fuego 🔥</button>
+                    <button id="boton-agua">Agua 💧</button>
+                    <button id="boton-tierra">Tierra 🌱</button>
+                </p>
+            </section>
 
-            <p>
-                <button id="boton-fuego">Fuego 🔥</button>
-                <button id="boton-agua">Agua 💧</button>
-                <button id="boton-tierra">Tierra 🌱</button>
-            </p>
-        </section>
-
-        <section id="mensajes">
-            
-        </section>
-
-        <section id="reiniciar">
+            <section id="mensajes">
+                
+            </section>
+        </div>
+        <div id="resultado-final" style="display: none">
+            <h1 id="titulo-final">Felicitaciones...Ganaste</h1>
+            <h2 id="result">Jugador <span id="vidas-j">0</span> - <span id="vida-e">0</span> Enemigo </h2>
+        </div>
+        <section id="reload">
             <button id="boton-reiniciar">Reiniciar</button>
         </section>
     </body>
